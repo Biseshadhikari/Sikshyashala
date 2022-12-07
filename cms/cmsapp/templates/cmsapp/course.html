@@ -1,0 +1,79 @@
+{%extends 'base.html'%}
+{%block content%}
+
+<style>
+    .active-video{
+        background-color:rgb(242, 236, 236) ;
+    }
+</style>
+
+
+<div class="container-fluid " style="max-height:100px">
+    
+    <div class="row my-2 mx-2">
+        {%if lesson%}
+        
+        
+        <div class="col-lg-2 my-5">
+            
+            
+            <h1 class="my-2 text-center">Lessons</h1>
+            <br>
+            
+                <ul class="list-group my-2">
+                    {%for lessons in courses.lessons_set.all%}
+                    <li class="list-group-item  {%if lessons == lesson%} active-video {%endif%} ">
+                        <a href="?lecture={{lessons.lesson_number}}" style="text-decoration:none; color: black;"> {{lessons}}</a>
+                    </li>
+                    {%endfor%}
+
+                    
+                </ul>
+                
+        </div>
+        
+        {%else%}
+        <div class="alert alert-secondary my-5" role="alert">
+            <h3 class="px-5 text-center">Thank you for visiting!! The course will be available soon</h1>
+          </div>
+        {%endif%}
+
+
+
+
+
+        <div class="col">
+            <div class="container mt-5">
+                <div class="row">
+                    
+
+                    <div class="col-sm-8">
+                        <!-- Post content-->
+                        <article>
+                            <!-- Post header-->
+                            <header class="mb-4">
+                                <!-- Post title-->
+                                <h1 class="fw-bolder mb-1">{{lesson.title}}</h1>
+                                <!-- Post meta content-->
+                                <!-- <div class="text-muted fst-italic mb-2">{{lesson.created}}</div> -->
+                                
+                                <!-- Post categories-->
+ 
+                                
+
+                            </header>
+                            <!-- Preview image figure-->
+                            <!-- Post content-->
+                            <section class="mb-5">
+                                <p class="fs-5 mb-4">{{lesson.body|safe}}</p>
+                            </section>
+                        </article>
+                        
+        </div>
+    </div>
+
+</div>
+
+
+
+{%endblock content%}

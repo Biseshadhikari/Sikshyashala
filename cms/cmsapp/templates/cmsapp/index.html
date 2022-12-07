@@ -1,0 +1,119 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+       <!-- Page header with logo and tagline-->
+    <header class="py-5 bg-light border-bottom mb-4 ">
+    <div class="container">
+        <div class="text-center my-5" >
+            <h1 class="fw-bolder" >Welcome to </h1><img 
+            src="{%static 'img/sikshyasala.png'%}" alt=""
+            class="my-3" style="height: 50px; width: 190px; ">
+            
+    
+            
+        </div>
+    </div>
+    </header>
+    <!-- Page content-->
+
+
+<!-- body -->
+{%if courses%}
+<div class="container-fluid px-5 mt-3">
+    <h1 class="text-center my-5">Our Courses</h1>
+    <div class="row">
+        <div class="col-lg-2  mx-auto my-2 mr-3">
+            <h3 class="mb-4">Select category</h3>
+            <a href="/" class="list-group-item list-group-item-action " ">All</a>
+            <div class="list-group">
+                {%for category in categories%}
+                <a href="/?category={{category.id}}" class="list-group-item " style="color: rgb(0, 170, 255);">{{category.name}}</a>
+                {%endfor%}
+               
+                
+            </div>
+
+        </div>
+
+        <div id ='product' class="col-sm-9 ">
+            <div class="row">
+                {%for course in courses%}
+                <div class="card shadow p-2 mb-4 bg-white rounded mx-2" style="width: 20rem; ">
+                <img class="card-img-top" src="{{course.image.url}}" alt="image" height="150px" width="180px">
+                <div class="card-body container">
+                    <h5 class="" >{{course.title}}</h5>
+                    <p>visit the course</p>
+                <div>
+                    <div>
+                    <a href="{%url 'course' course.slug%}"  class="btn btn-primary" >Visit Course</a>
+                    {%if request.user.is_authenticated %}
+                    <form  method="post" style=" display: inline-block;">
+                        {%csrf_token%}
+                        <input type="text" value="{{course.id}}" name="course_id" style="display:none;">
+
+                        <button class="btn btn-secondary">Add to read later</button>
+                    </form>
+                    {%endif%}
+                </div>
+
+                </div>
+                </div>
+                </div>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+</div>
+</style>
+<footer class="text-center text-lg-start bg-light text-muted">
+ 
+    <div class="text-center p-4 eidt" style="background-color: rgba(0, 0, 0, 0.05);">
+      ©Copyright:
+      <a class="text-reset fw-bold" href="">PI Innovations</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+{%else%}
+<div class="alert alert-secondary my-5 container" role="alert">
+    <h3 class="px-5 text-center">Coming soon</h1>
+   
+
+</div>
+<br>
+<br>
+<br>
+<br>
+
+<br>
+<br>
+<br>
+<br><br>
+<br>
+<br>
+<br><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<footer class="text-center text-lg-start bg-light text-muted">
+ 
+    <div class="text-center p-4 eidt" style="background-color: rgba(0, 0, 0, 0.05);">
+      ©Copyright:
+      <a class="text-reset fw-bold" href="">PI Innovations</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+{%endif%}
+
+
+
+
+
+    
+{%endblock content%}
+
+
