@@ -2,33 +2,32 @@
 {%load static%}
 {%block content%}
 {%load myapp_extras%}
-       <!-- Page header with logo and tagline-->
-    <header class="py-5 bg-light border-bottom mb-4 ">
+<!-- Page header with logo and tagline-->
+<header class="py-5 bg-light border-bottom mb-4 ">
     <div class="container">
-        <div class="text-center my-5" >
-            <h1 class="fw-bolder" >Welcome to </h1><img 
-            src="{%static 'img/sikshyasala.png'%}" alt=""
-            class="my-3" style="height: 50px; width: 190px; ">
-            
-    
-            
+        <div class="text-center my-5">
+            <h1 class="fw-bolder">Welcome to </h1><img src="{%static 'img/sikshyasala.png'%}" alt="" class="my-3"
+                style="height: 50px; width: 190px; ">
+
+
+
         </div>
         {% for message in messages %}
-            <div class="alert {{ message.tags }} alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
-                </button>
-                <div class="alert alert-primary  my-2 container text-center" >
-                    {{ message }}
-                </div>
-                
+            </button>
+            <div class="alert alert-info  my-2 container text-center">
+                {{ message }}
             </div>
+
+        </div>
         {% endfor %}
 
-  
+
     </div>
-    </header>
-    <!-- Page content-->
+</header>
+<!-- Page content-->
 
 
 <!-- body -->
@@ -39,68 +38,73 @@
         <div class="col-lg-2  mx-auto my-2 mr-3">
             <h3 class="mb-4">Select category</h3>
             <a href="/" class="list-group-item list-group-item-action " ">All</a>
-            <div class="list-group">
+            <div class=" list-group">
                 {%for category in categories%}
-                <a href="/?category={{category.id}}" class="list-group-item " style="color: rgb(0, 170, 255);">{{category.name}}</a>
+                <a href="/?category={{category.id}}" class="list-group-item "
+                    style="color: rgb(0, 170, 255);">{{category.name}}</a>
                 {%endfor%}
-               
-                
-            </div>
+
 
         </div>
 
-        <div id ='product' class="col-sm-9 ">
-            <div class="row">
-                {%for course in courses%}
-                <div class="card shadow p-2 mb-4 bg-white rounded mx-2" style="width: 20rem; ">
+    </div>
+
+    <div id='product' class="col-sm-9 ">
+        <div class="row">
+            {%for course in courses%}
+            <div class="card shadow p-2 mb-4 bg-white rounded mx-2" style="width: 20rem; ">
                 <img class="card-img-top" src="{{course.image.url}}" alt="image" height="150px" width="180px">
                 <div class="card-body container">
-                    <h5 class="" >{{course.title}}</h5>
+                    <h5 class="">{{course.title}}</h5>
                     <p>visit the course</p>
-                <div>
                     <div>
-                    <a href="{%url 'course' course.slug%}"  class="btn btn-primary" >Visit Course</a>
-                    {%if request.user.is_authenticated %}
-                    <form  method="post" style=" display: inline-block;">
-                        {%csrf_token%}
-                        <input type="text" value="{{course.id}}" name="course_id" style="display:none;">
+                        <div>
+                            <a href="{%url 'course' course.slug%}" class="btn btn-primary">Visit Course</a>
+                            {%if request.user.is_authenticated %}
+                            <form method="post" style=" display: inline-block;">
+                                {%csrf_token%}
+                                <input type="text" value="{{course.id}}" name="course_id" style="display:none;">
 
-                        <button class="btn btn-secondary">Add to read later</button>
-                    </form>
-                    {%endif%}
-                </div>
+                                <button class="btn btn-secondary">Add to read later</button>
+                            </form>
+                            {%endif%}
+                        </div>
 
+                    </div>
                 </div>
-                </div>
-                </div>
-                {%endfor%}
             </div>
+            {%endfor%}
         </div>
     </div>
+</div>
 </div>
 <div class="container mt-2">
     <div class="row ">
         <div class="col-md-4 offset-lg-5">
             {%if courses.has_other_pages%}
-                <div >
-                    <ul class="pagination pagination-lg container">
+            <div>
+                <ul class="pagination pagination-lg container">
                     {% if courses.has_previous %}
                     <li class="page-item ">
-                        <a class="page-link" href="{%my_url courses.previous_page_number 'page' request.GET.urlencode %}" tabindex="-1" style="color: black;">Previous</a>
+                        <a class="page-link"
+                            href="{%my_url courses.previous_page_number 'page' request.GET.urlencode %}" tabindex="-1"
+                            style="color: black;">Previous</a>
                     </li>
                     {%endif%}
                     {%for i in courses.paginator.page_range%}
 
-                    <li class="page-item"><a class="page-link" href="{%my_url i 'page' request.GET.urlencode %}" style="color:rgb(56, 54, 51)">{{i}}</a></li>
-                    
+                    <li class="page-item"><a class="page-link" href="{%my_url i 'page' request.GET.urlencode %}"
+                            style="color:rgb(56, 54, 51)">{{i}}</a></li>
+
                     {%endfor%}
                     {% if courses.has_next %}
                     <li class="page-item ">
-                        <a class="page-link" href="{%my_url courses.next_page_number 'page' request.GET.urlencode %}" tabindex="-1" style="color: black;">Next</a>
+                        <a class="page-link" href="{%my_url courses.next_page_number 'page' request.GET.urlencode %}"
+                            tabindex="-1" style="color: black;">Next</a>
                     </li>
                     {%endif%}
-                    </ul>
-                </div>
+                </ul>
+            </div>
             {%endif%}
         </div>
     </div>
@@ -109,40 +113,11 @@
 
 
 
-<footer class="text-center text-lg-start bg-light text-muted">
- 
-    <div class="text-center p-4 eidt" style="background-color: rgba(0, 0, 0, 0.05);">
-      ©Copyright:
-      <a class="text-reset fw-bold" href="">PI Innovations</a>
-    </div>
-    <!-- Copyright -->
-</footer>
 {%else%}
 <div class="alert alert-secondary my-5 container" role="alert">
     <h3 class="px-5 text-center">Coming soon</h3>
 </div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
- <br>
-<br>
-<br>
- <br>
-<br>
-<br>
- <br>
-<br>
-<footer class="text-center text-lg-start bg-light text-muted">
- 
-    <div class="text-center p-4 eidt" style="background-color: rgba(0, 0, 0, 0.05);">
-      ©Copyright:
-      <a class="text-reset fw-bold" href="">PI Innovations</a>
-    </div>
-    <!-- Copyright -->
-</footer>
+
 {%endif%}
 
 
@@ -150,7 +125,5 @@
 
 
 
-    
+
 {%endblock content%}
-
-

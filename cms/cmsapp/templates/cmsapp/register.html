@@ -22,40 +22,42 @@
 			<hr>
             </div>
             <h3 hidden class="alert alert-light border rounded">Create An Account</h3>
-			{% for message in messages %}
-			<div class="container-fluid p-0">
-			  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
-				<div class="alert alert-primary  my-2 container text-align-center" >
-					{{ message }}
-				</div>
-			  </div>
-			</div>
-			{% endfor %}
+            {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="alert alert-primary  my-2 container text-center" >
+                    {{ message }}
+                </div>
+                
+            </div>
+        {% endfor %}
 	
             <form method="POST">
                 
                 {% csrf_token %}
 
  
-                <!-- firstname -->
+                
 				<div class="form-group">
                     <label for="">Username</label>
                     <input type="text" name="username" 
-                    id=""  class="form-control form-control-sm"
+                    id=""  class="form-control form-control-sm" placeholder="Username"
                     >
                 </div>
                 <div class="form-group">
                     <label for="">First Name</label>
                     <input type="text" name="fname"
                      id=""  class="form-control form-control-sm" 
-                     placeholder="">
+                     placeholder="First Name">
                 </div>
 
                 <!-- last name -->
                 <div class="form-group">
                     <label for="">Last Name</label>
                     <input type="text" name="lname" 
-                    id=""  class="form-control form-control-sm"
+                    id=""  class="form-control form-control-sm" placeholder="Last Name"
                     >
                 </div>
 
@@ -78,6 +80,13 @@
                     id=""
                      class="form-control form-control-sm" placeholder="********">
                 </div>
+                <div class="form-group">
+                    <label for="">Confirm Password</label>
+                    <input type="password" 
+                    name="cpassword" 
+                    id=""
+                     class="form-control form-control-sm" placeholder="********">
+                </div>
 
                 <hr>
                 <div class="form-group">
@@ -90,15 +99,6 @@
     </div>
 </div>
 
-<footer class="text-center text-lg-start bg-light text-muted">
- 
-    <div class="text-center p-4 eidt" style="background-color: rgba(0, 0, 0, 0.05);">
-            ©Copyright:
-
-      <a class="text-reset fw-bold" href="">PI Innovations</a>
-    </div>
-    <!-- Copyright -->
-</footer>
 
 {% endblock %}
 
@@ -107,16 +107,6 @@
 
 
 
-<!-- 
-{% if messages %}
-<ul class="messages mx-1"">
-	{% for message in messages %}
-	<div class="alert alert-danger  my-2 container text-align-center" style="display: flex; align-items: center;">
-		<h1 style=" font-size: 15px;">{{ message }}</h1>
-	</div>
-	{% endfor %}
-</ul>
-{% endif %} -->
 
 
 

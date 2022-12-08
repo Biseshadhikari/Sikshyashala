@@ -7,7 +7,6 @@ urlpatterns = [
     path('login/',views.signin,name='login'),
     path('signup/',views.register,name = 'register'),
     path('token_send/',views.token_send,name = 'tokensend'),
-    path('success/',views.success,name = 'success'),
     path('verify/<auth_token>',views.verify,name = 'verify'),
     path('error/',views.error,name = 'error'),
     path('logout/',views.user_logout,name='logout'),
