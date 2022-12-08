@@ -26,6 +26,7 @@ def watchlater(request):
         for j in ids:
             try:
                 value = Course.objects.get(id=j)
+                courses.append(value)
 
             except courses.DoesNotExist:
                 courses = None
