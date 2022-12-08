@@ -8,6 +8,7 @@ from django.core.mail import send_mail
 from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
+from django.core.paginator import Paginator
 
 
 # Create your views here.
@@ -17,13 +18,13 @@ def watchlater(request):
         
 
         ids = []
-        id1 =[]
+        
         for i in watch:
             ids.append(i.course_id)
-            id1.append(i.watch_id)
+            
         
         courses =[]
-        # print(id1)
+        
         for j in ids:
             try:
                 value = Course.objects.get(id = j)
@@ -31,33 +32,52 @@ def watchlater(request):
                 courses.append(value)
             except courses.DoesNotExist:
                 courses = None
+        course_number = len(courses)
         
         
-        return render(request,'cmsapp/watchlater.html',{'courses':courses,'id1':id1})
+        return render(request,'cmsapp/watchlater.html',{'courses':courses,'course_number':course_number})
     else:
         return redirect('login')
 def index(request):
-    courses = None
+    
     categories = category.objects.all()
+    courses = Course.objects.all()
+    page = request.GET.get('page')
+    paginator = Paginator(courses,3)
+    try:
+        courses = paginator.page(page)
+    except Exception as  PageNotAnInteger:
+        courses = paginator.page(1)
+    except Exception as  EmptyPage:
+        courses = paginator.page(paginator.num_pages)
+    
     
     categoryID = request.GET.get('category')
     if categoryID:
-        courses = Course.get_all_product_by_id(categoryID)
-    else:
         courses = Course.objects.all()
+        courses = Course.get_all_product_by_id(categoryID)
+        page = request.GET.get('page',1)
+        paginator = Paginator(courses,3)
+        try:
+            courses = paginator.page(page)
+        except courses.PageNotAnInteger:
+            courses = paginator.page(1)
+        except courses.EmptyPage:
+            courses = paginator.page(paginator.num_pages)
 
-    
     if request.method =="POST":
         user = request.user
         course_id = request.POST.get('course_id')
         watch = watch_later.objects.filter(user = user)
         for i in watch:
             if course_id == i.course_id:
+                messages.success(request,'Already added to read later')
                 break
         else:
 
             watchlater = watch_later(user = user,course_id = course_id)
             watchlater.save()
+            messages.success(request,'Added to read later')
             
         return redirect('home')
         
@@ -176,10 +196,10 @@ def error(request):
 
 
 def delete_watchlater(request,pk):
-    print(pk)
-    print(request.user)
+
     get_watch = watch_later.objects.get(user = request.user,course_id = pk)
     get_watch.delete()
+    
     return redirect('readlater')
     
 
