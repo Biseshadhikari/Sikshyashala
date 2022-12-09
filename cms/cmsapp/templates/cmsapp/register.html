@@ -4,88 +4,78 @@
 {% block content %}
 
 <div class="container mt-4">
-    
+
     <div class="p-4 m-4">
 
-        
+
         <div class="col-lg-5 rounded mx-auto border pt-4">
             <div class="text-center col">
-            
-                <img 
-                src="{%static 'img/sikshyasala.png'%}" alt=""
-                class="my-3" style="height: 50px; width: 190px;">
-            <!-- <hr> -->
-            
-	
-            <hr>
-			<div class="display-8"><strong><h3>Create An Account</h3></strong> </div>
-			<hr>
+
+                <img src="{%static 'img/sikshyasala.png'%}" alt="" class="my-3" style="height: 50px; width: 190px;">
+                <!-- <hr> -->
+
+
+                <hr>
+                <div class="display-8"><strong>
+                        <h3>Create An Account</h3>
+                    </strong> </div>
+                <hr>
             </div>
             <h3 hidden class="alert alert-light border rounded">Create An Account</h3>
             {% for message in messages %}
             <div class="alert {{ message.tags }} alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">&times;</span>
                 </button>
-                <div class="alert alert-primary  my-2 container text-center" >
+                <div class="alert alert-primary  my-2 container text-center">
                     {{ message }}
                 </div>
-                
+
             </div>
-        {% endfor %}
-	
+            {% endfor %}
+
             <form method="POST">
-                
+
                 {% csrf_token %}
 
- 
-                
-				<div class="form-group">
+
+
+                <div class="form-group">
                     <label for="">Username</label>
-                    <input type="text" name="username" 
-                    id=""  class="form-control form-control-sm" placeholder="Username"
-                    >
+                    <input type="text" name="username" id="" class="form-control form-control-sm"
+                        placeholder="Username">
                 </div>
                 <div class="form-group">
                     <label for="">First Name</label>
-                    <input type="text" name="fname"
-                     id=""  class="form-control form-control-sm" 
-                     placeholder="First Name">
+                    <input type="text" name="fname" id="" class="form-control form-control-sm" placeholder="First Name">
                 </div>
 
                 <!-- last name -->
                 <div class="form-group">
                     <label for="">Last Name</label>
-                    <input type="text" name="lname" 
-                    id=""  class="form-control form-control-sm" placeholder="Last Name"
-                    >
+                    <input type="text" name="lname" id="" class="form-control form-control-sm" placeholder="Last Name">
                 </div>
 
-                
+
 
                 <!-- email -->
                 <div class="form-group">
                     <label for="">Email</label>
-                    <input required type="email" name="email" id=""
-                    value="{{values.email}}" 
-                    class=" form-control-sm form-control" placeholder="example@gmail.com">
+                    <input required type="email" name="email" id="" value="{{values.email}}"
+                        class=" form-control-sm form-control" placeholder="example@gmail.com">
                 </div>
 
 
                 <!-- password -->
                 <div class="form-group">
                     <label for="">Password</label>
-                    <input type="password" 
-                    name="password" 
-                    id=""
-                     class="form-control form-control-sm" placeholder="********">
+                    <input type="password" name="password" id="" class="form-control form-control-sm"
+                        placeholder="********">
                 </div>
                 <div class="form-group">
                     <label for="">Confirm Password</label>
-                    <input type="password" 
-                    name="cpassword" 
-                    id=""
-                     class="form-control form-control-sm" placeholder="********">
+                    <input type="password" name="cpassword" id="" class="form-control form-control-sm"
+                        placeholder="********">
                 </div>
 
                 <hr>
@@ -93,7 +83,7 @@
                     <input class="btn btn-sm btn-secondary" type="submit" value="Create An Account ">
                 </div>
 
-                
+
             </form>
         </div>
     </div>
@@ -101,12 +91,3 @@
 
 
 {% endblock %}
-
-
-
-
-
-
-
-
-

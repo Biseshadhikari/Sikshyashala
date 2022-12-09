@@ -8,57 +8,99 @@
 {%if courses%}
 <div class="container-fluid px-5 mt-3">
     <h1 class="text-center my-5">{{course_number}} courses saved in read later</h1>
-
+    
     <div class="row">
         <div class="col-lg-3 col-sm-0" style="visibility: hidden;">
             <h3 class="mb-4">Select category</h3>
             <div class="list-group">
-
-
+                
+                
             </div>
 
         </div>
 
 
-        <div id='product' class="col-sm-8 ">
-
+        <div id ='product' class="col-sm-8 ">
+            
             <div class="row mx-1">
                 {%for course in courses%}
                 <div class="card shadow p-2 mb-4 bg-white rounded mx-2" style="width: 20rem; ">
-                    <img class="card-img-top" src="{{course.image.url}}" alt="image" height="180px" width="200px">
-                    <div class="card-body container">
-                        <h5 class="card-title "><strong>{{course.title}}</strong></h5>
-                        <br>
+                <img class="card-img-top" src="{{course.image.url}}" alt="image" height="180px" width="200px">
+                <div class="card-body container">
+                    <h5 class="card-title " ><strong>{{course.title}}</strong></h5>
+                    <br>
+                    
+                <div>
+                
+                    <a href="{%url 'course' course.slug%}"  class="btn btn-primary">Read now</a>
+                    <a href="{%url 'delete' course.id%}" class="btn btn-danger">Remove from read later</a>
+                    
+                    
+                    
 
-                        <div>
-
-                            <a href="{%url 'course' course.slug%}" class="btn btn-primary">Read now</a>
-                            <a href="{%url 'delete' course.id%}" class="btn btn-danger">Remove from read later</a>
-
-
-
-
-                        </div>
-                    </div>
+                </div>
+                </div>
                 </div>
                 {%endfor%}
             </div>
-
-
+ 
+            
 
         </div>
     </div>
 </div>
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<footer class="text-center text-lg-start bg-light text-muted">
+ 
+    <div class="text-center p-4 eidt" style="background-color: rgba(0, 0, 0, 0.05);">
+      ©Copyright:
+      <a class="text-reset fw-bold" href="">PI Innovations</a>
+    </div>
+    <!-- Copyright -->
+</footer>
 {%else%}
 <div class="alert alert-secondary my-5 container" role="alert">
     <h3 class="px-5 text-center">No course in read later</h1>
-</div>
+  </div>
+  <br>
+<br>
+<br>
+<br>
+
+<br>
+<br>
+<br>
+<br><br>
+<br>
+<br>
+<br><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<footer class="text-center text-lg-start bg-light text-muted">
+ 
+    <div class="text-center p-4 eidt" style="background-color: rgba(0, 0, 0, 0.05);">
+      ©Copyright:
+      <a class="text-reset fw-bold" href="">PI Innovations</a>
+    </div>
+    <!-- Copyright -->
+</footer>
 {%endif%}
 
 
 
 
 
-
+    
 {%endblock content%}
+
+
